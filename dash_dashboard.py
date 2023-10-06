@@ -21,6 +21,8 @@ ua_df = pd.read_csv('data/losses_ukraine.csv')
 # Initialize the app
 app = Dash(__name__)
 
+# Long paragraphs that will appear in the app
+
 # App layout
 app.layout = html.Div([
     html.Div(children='Data Science: Week 5 exercise:'),
@@ -28,7 +30,16 @@ app.layout = html.Div([
     html.Hr(),
     html.Div(children='View vehicle manufacturer distribution for:'),
     dcc.RadioItems(options=['Russia', 'Ukraine'], value='Ukraine', id='country-radioitem'),
-    dcc.Graph(figure={}, id='manufacturer-graph')
+    dcc.Graph(figure={}, id='manufacturer-graph'),
+    html.Span(children=[
+        "Russia is almost entirely dependent on its own material and old Soviet stock.",
+        html.Br(),
+        "While Ukraine also relies heavily on old Soviet equipment,\
+        it is also receiving support from a number of countries aligned with its goals and values.",
+        html.Br(),
+        "The disparity of foreign supplied vehicles to the two countries reveal\
+        a similar disparity in political support to the two countries.",
+    ]),
 ])
 
 # Add controls to build the interaction
