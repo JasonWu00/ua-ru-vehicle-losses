@@ -18,6 +18,19 @@ import plotly.express as px
 ru_df = pd.read_csv('data/losses_russia.csv')
 ua_df = pd.read_csv('data/losses_ukraine.csv')
 
+# In-place data cleaning
+
+losses_types = [
+    "abandoned",
+    "captured",
+    "damaged",
+    "destroyed",
+    "sunk"
+]
+ru_df[losses_types] = ru_df[losses_types].fillna(0)
+ua_df[losses_types] = ua_df[losses_types].fillna(0)
+
+
 # Initialize the app
 app = Dash(__name__)
 
@@ -40,6 +53,10 @@ app.layout = html.Div([
         "The disparity of foreign supplied vehicles to the two countries reveal\
         a similar disparity in political support to the two countries.",
     ]),
+    html.Hr(),
+    html.Div(children='View vehicle loss distribution for:'),
+    dcc.RadioItems(options=['Russia', 'Ukraine'], value='Ukraine', id='country-losses-radioitem'),
+    dcc.Graph(figure={}, id='loss-graph'),
 ])
 
 # Add controls to build the interaction
@@ -47,11 +64,22 @@ app.layout = html.Div([
     Output(component_id='manufacturer-graph', component_property='figure'),
     Input(component_id='country-radioitem', component_property='value')
 )
-def update_graph(col_chosen):
+def update_manufacturers_graph(col_chosen):
     if col_chosen == "Russia":
         figure=px.histogram(ru_df, x='manufacturer', y='losses_total', histfunc='sum')
     elif col_chosen == "Ukraine":
         figure=px.histogram(ua_df, x='manufacturer', y='losses_total', histfunc='sum')
+    return figure
+
+@callback(
+    Output(component_id='loss-graph', component_property='figure'),
+    Input(component_id='country-losses-radioitem', component_property='value')
+)
+def update_loss_graph(col_chosen):
+    if col_chosen == "Russia":
+        figure=px.histogram(ru_df, x="equipment", histfunc='sum')
+    elif col_chosen == "Ukraine":
+        figure=px.histogram(ua_df, x="equipment", histfunc='sum')
     return figure
 
 # Run the app
