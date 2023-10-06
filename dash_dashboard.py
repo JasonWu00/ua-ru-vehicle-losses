@@ -30,6 +30,7 @@ losses_types = [
 ru_df[losses_types] = ru_df[losses_types].fillna(0)
 ua_df[losses_types] = ua_df[losses_types].fillna(0)
 
+# create new dfs to store the sum of each type of loss.
 ru_losses_sum = pd.DataFrame(columns=losses_types)
 ua_losses_sum = pd.DataFrame(columns=losses_types)
 ru_losses_sum.loc[0] = [0,0,0,0,0]
@@ -38,14 +39,16 @@ for type in losses_types:
     ru_losses_sum[type].loc[0] = ru_df[type].sum()
     ua_losses_sum[type].loc[0] = ua_df[type].sum()
 
+# rotate, turn index into entries, and rename columns
+# to make the dfs fit px histograms
 ru_losses_sum = ru_losses_sum.transpose()
 ua_losses_sum = ua_losses_sum.transpose()
 ru_losses_sum = ru_losses_sum.reset_index()
 ua_losses_sum = ua_losses_sum.reset_index()
 ru_losses_sum.rename(columns={0: "count"}, inplace=True)
 ua_losses_sum.rename(columns={0: "count"}, inplace=True)
-print(ru_losses_sum)
-print(ua_losses_sum)
+# print(ru_losses_sum)
+# print(ua_losses_sum)
 
 # Initialize the app
 app = Dash(__name__)
