@@ -49,10 +49,35 @@ def update_loss_time_graph():
                               "count": "Number of vehicles lost"
                           }
                           )
-    # if col_chosen == "Russia":
-    #     figure=px.histogram(ru_df, x='manufacturer', y='losses_total', histfunc='sum')
-    # elif col_chosen == "Ukraine":
-    #     figure=px.histogram(ua_df, x='manufacturer', y='losses_total', histfunc='sum')
+    # reference: https://plotly.com/python/horizontal-vertical-shapes/
+    # Adding mostly transparent colored bars to denote major conflict moments
+    figure.add_vrect(x0="2022-02-24", x1="2022-04-01", 
+                    annotation_text="Kyiv", annotation_position="top left",
+                    fillcolor="red", opacity=0.25, line_width=0)
+    figure.add_vrect(x0="2022-05-05", x1="2022-05-13", 
+                    annotation_text="Siverskiy Donets", annotation_position="top left",
+                    fillcolor="red", opacity=0.25, line_width=0)
+    figure.add_vrect(x0="2022-09-06", x1="2022-10-12", 
+                    annotation_text="Kharkiv", annotation_position="top left",
+                    fillcolor="blue", opacity=0.25, line_width=0)
+    figure.add_vrect(x0="2022-08-29", x1="2022-11-11", 
+                    annotation_text="Kherson", annotation_position="outside top right",
+                    fillcolor="blue", opacity=0.25, line_width=0)
+    figure.add_vrect(x0="2023-01-07", x1="2023-04-01", 
+                    annotation_text="Bakhmut", annotation_position="outside top right",
+                    fillcolor="red", opacity=0.25, line_width=0)
+    figure.add_vrect(x0="2023-01-24", x1="2023-02-15", 
+                    annotation_text="Vuhledar", annotation_position="top left",
+                    fillcolor="red", opacity=0.25, line_width=0)
+    figure.add_vrect(x0="2023-06-04", x1="2023-10-17", 
+                    annotation_text="Zaporizhzhia", annotation_position="top left",
+                    fillcolor="blue", opacity=0.25, line_width=0)
+    
+    # the last cleaned data doesn't go up to the failed Russian offensive against
+    # the Avdiivka slag heap mountain, so I will exclude this for the time being.
+    # figure.add_vrect(x0="2023-10-18", x1="2023-11-01", 
+    #                 annotation_text="Avdiivka", annotation_position="top left",
+    #                 fillcolor="red", opacity=0.25, line_width=0)
     return figure
 
 # Initialize the app
