@@ -90,12 +90,63 @@ app = Dash(__name__)
 # Display RU/UA values side by side for a better comparison
 
 app.layout = html.Div([
-    html.Div(children='Data Science Project: Analysis on the War in Ukraine'),
-    html.Div(children='On the distribution of losses over time'),
-    html.Div(children='Author: Ze Hong Wu'),
-    html.Div(children='View vehicle losses over time for Russia and Ukraine, per week:'),
+    html.Div(children=[
+        'Data Science Project: Analysis on the War in Ukraine',
+        html.Br(),
+        'On the distribution of losses over time',
+        html.Br(),
+        'Author: Ze Hong Wu',
+    ]),
+    html.Hr(),
+    html.H4(children="Introduction"),
+    html.Div(children=[
+        "For the purposes of this project, we will be analyzing data sets on known vehicle losses \
+        in Russia's invasion of Ukraine.",
+        html.Br(),
+        "Our analysis is based on data scraped from the [Oryx blog]\
+        (https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html).",
+    ]),
+    html.Hr(),
+    html.H4(children="Visualizations"),
+    html.Span(children='Vehicle losses over time for Russia and Ukraine, per day,\
+              from 24 February 2022 to 18 October 2023:'),
     #dcc.RadioItems(options=['Russia', 'Ukraine'], value='Russia', id='country-radioitem'),
     dcc.Graph(figure=update_loss_time_graph(), id='time-loss-graph'),
+    html.Hr(),
+    html.H6(children="Disclaimer:"),
+    html.Span(children=[
+        "Due to limitations in our data acquisition and cleaning process, \
+        namely poorly formatted source data, the losses shown in this visualization represent \
+        only a subset of the whole Oryx blog data set. Many of the entries only contain \
+        loss dates as text in images, and wrangling a neural network to carry out OCR \
+        analysis on the data set is beyond the current scope of this project. Because of this, \
+        the graph above represents only part of all confirmed losses.",
+        html.Br(),
+        "The data set we used was last updated on 18 October 2023. Any events that occurred \
+        after this date, such as the ongoing Russian offensive in the Avdiivka direction, \
+        are not reflected in this analysis."
+    ]),
+    html.H6(children="Analysis:"),
+    html.Div(children=[
+        "This graph displays the number of dated losses, per day, from the start of the war \
+        to the current time.",
+        html.Br(),
+        "Parts of the graph, corresponding to periods of intense battle, are marked \
+        with semi-transparent bars with the names of the battles at the top. These periods are \
+        color-coded to denote the country starting them, red for Russia and blue for Ukraine.",
+        html.Br(),
+        "Notice that, during offensives launched by both sides, Ukraine consistently destroys more \
+        enemy vehicles compared to Russia. For a country who is supposedly on the verge of collapsing \
+        against a much more powerful enemy, they sure are doing a lot better than expected.",
+        html.Br(),
+        "Pay special attention to the Kharkiv counter-offensive portions of the graph \
+        and notice the large spike of Russian vehicle losses. Some people claim that this offensive \
+        was an abject failure and was the equivalent of the Battle of tbe Bulge. How did a \
+        so-called 'inconsequential' skirmish lead to such significant Russian losses? \
+        We will leave that as an exercise to the reader.",
+        html.Br(),
+        "",
+    ]),
 ])
 
 #https://www.nomidl.com/projects/russia-ukraine-war-data-analysis-project-using-python/#google_vignette
