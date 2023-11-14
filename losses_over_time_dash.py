@@ -42,7 +42,8 @@ def update_loss_time_graph():
                           color="user",
                           color_discrete_map={"Russia": "red", "Ukraine": "blue"},
                           nbins=500,
-                          title="Vehicle losses with confirmed dates, 24 Feb 2022 to Present Day",
+                          title=
+                          "Vehicle losses over time for Russia and Ukraine, per day, from 24 February 2022 to 18 October 2023:",
                           labels={
                               "date_lost": "Date",
                               "user": "Number of vehicles lost",
@@ -103,17 +104,22 @@ app.layout = html.Div([
         "For the purposes of this project, we will be analyzing data sets on known vehicle losses \
         in Russia's invasion of Ukraine.",
         html.Br(),
-        "Our analysis is based on data scraped from the [Oryx blog]\
-        (https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html).",
+        "Our analysis is based on data scraped from the ",
+        html.A(
+            children="Oryx blog",
+            href="https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html",
+            ),
+        ", which contains individual confirmed vehicles lost in Ukraine as well as \
+        image proof of their loss and (sometimes) dates when they were lost.",
     ]),
     html.Hr(),
     html.H4(children="Visualizations"),
-    html.Span(children='Vehicle losses over time for Russia and Ukraine, per day,\
-              from 24 February 2022 to 18 October 2023:'),
+    # html.Span(children='Vehicle losses over time for Russia and Ukraine, per day,\
+    #           from 24 February 2022 to 18 October 2023:'),
     #dcc.RadioItems(options=['Russia', 'Ukraine'], value='Russia', id='country-radioitem'),
     dcc.Graph(figure=update_loss_time_graph(), id='time-loss-graph'),
     html.Hr(),
-    html.H6(children="Disclaimer:"),
+    html.H4(children="Disclaimer:"),
     html.Span(children=[
         "Due to limitations in our data acquisition and cleaning process, \
         namely poorly formatted source data, the losses shown in this visualization represent \
@@ -126,7 +132,7 @@ app.layout = html.Div([
         after this date, such as the ongoing Russian offensive in the Avdiivka direction, \
         are not reflected in this analysis."
     ]),
-    html.H6(children="Analysis:"),
+    html.H4(children="Analysis:"),
     html.Div(children=[
         "This graph displays the number of dated losses, per day, from the start of the war \
         to the current time.",
@@ -139,11 +145,16 @@ app.layout = html.Div([
         enemy vehicles compared to Russia. For a country who is supposedly on the verge of collapsing \
         against a much more powerful enemy, they sure are doing a lot better than expected.",
         html.Br(),
-        "Pay special attention to the Kharkiv counter-offensive portions of the graph \
-        and notice the large spike of Russian vehicle losses. Some people claim that this offensive \
-        was an abject failure and was the equivalent of the Battle of tbe Bulge. How did a \
-        so-called 'inconsequential' skirmish lead to such significant Russian losses? \
-        We will leave that as an exercise to the reader.",
+        "Pay special attention to the ",
+        html.A(
+            children="Kharkiv counter-offensive",
+            href="https://en.wikipedia.org/wiki/2022_Kharkiv_counteroffensive",
+        ),
+        " portions of the graph and notice the large spike of Russian vehicle losses. \
+        Some people claim that this offensive was an abject failure and was \
+        the equivalent of the Battle of tbe Bulge. How did a so-called 'inconsequential' \
+        skirmish lead to such significant Russian losses? We will leave that as an exercise \
+        to the reader.",
         html.Br(),
         "",
     ]),
