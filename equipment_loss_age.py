@@ -1,36 +1,65 @@
-# Step 1: import library
+# import library
 import pandas as pd
 import streamlit as st
+import altair as alt
 
-# Step 2: Load the CSV data
-data = pd.read_csv("data/oryx/ru_losses.csv")
+# Load the CSV data
+df = pd.read_csv("data/oryx/ru_losses.csv")
+df2 = pd.read_csv("data/oryx/ua_losses.csv")
 
-# Step 3: Create the "destroyed_date" column
-def combine_date(row):
-    try:
-        day = int(row['day'])
-        month = int(row['month'])
-        year = int(row['year'])
-        return pd.to_datetime(f'{day}/{month}/{year}', format='%d/%m/%y')
-    except (ValueError, TypeError):
-        return pd.NaT  # Set to NaN for non-finite or missing values
+# Drop rows with null values
+df = df.dropna()
+df2 = df2.dropna()
 
-# Step 4 Apply the custom function to create the "Date" column
-data["destroyed_date"] = data.apply(combine_date, axis=1)
-data["destroyed_date"] = data["destroyed_date"].dt.strftime('%Y-%m-%d')
-# Step 5: Filter out rows with null values in "destroyed_date"
-data = data.dropna(subset=["destroyed_date"])
+# Combine the two DataFrames
+combined_df = pd.concat([df.assign(dataset='ru'), df2.assign(dataset='ua')])
 
-# Step 6: Create a Streamlit Scatter Plot
+# Create a Streamlit Scatter Plot
 st.title("Year First Produced vs Destroyed Date")
-st.write("Scatter plot to compare 'year_first_produced' and 'destroyed_date'")
 
-st.write(data[['year_first_produced', 'destroyed_date']])
-st.scatter_chart(data=data, x="destroyed_date", y="year_first_produced")
+# Add a toggle button to show/hide 'ru' data for Scatter Plot
+show_ru_scatter = st.checkbox('Show RU Data (Scatter)', value=True)
 
-# Step 7: Create a second chart to calculate the average "year_first_produced" for each "destroyed_date"
-average_years = data.groupby("destroyed_date")["year_first_produced"].mean()
+# Add a toggle button to show/hide 'ua' data for Scatter Plot
+show_ua_scatter = st.checkbox('Show UA Data (Scatter)', value=True)
+
+# Set the y-axis limits
+y_min = 1940
+y_max = 2030
+
+# Filter the DataFrame based on user input for Scatter Plot
+filtered_df_scatter = combined_df[((combined_df['dataset'] == 'ru') & show_ru_scatter) | ((combined_df['dataset'] == 'ua') & show_ua_scatter)]
+
+scatter_chart = alt.Chart(filtered_df_scatter).mark_circle(size=60).encode(
+    x='date_lost',
+    y=alt.Y('year_first_produced', scale=alt.Scale(domain=[y_min, y_max])),
+    color=alt.Color('dataset:N', scale=alt.Scale(domain=['ru', 'ua'], range=['blue', 'red']))
+).properties(width=600, height=400)
+
+st.altair_chart(scatter_chart)
+
+st.write("As time passes, both sides are using vehicles that are neither older nor newer.")
+
+# Create a Streamlit Line Chart
 st.title("Average Year First Produced vs Destroyed Date")
-st.write("Line chart to show the average 'year_first_produced' for each 'destroyed_date'")
 
-st.line_chart(average_years)
+# Add a toggle button to show/hide 'ru' data for Line Chart
+show_ru_line = st.checkbox('Show RU Data (Line)', value=True)
+
+# Add a toggle button to show/hide 'ua' data for Line Chart
+show_ua_line = st.checkbox('Show UA Data (Line)', value=True)
+
+# Filter the DataFrame based on user input for Line Chart
+filtered_df_line = combined_df[((combined_df['dataset'] == 'ru') & show_ru_line) | ((combined_df['dataset'] == 'ua') & show_ua_line)]
+
+# Create a second chart to calculate the average "year_first_produced" for each "date_lost"
+average_years = filtered_df_line.groupby(["dataset", "date_lost"])["year_first_produced"].mean().reset_index()
+average_years_chart = alt.Chart(average_years).mark_line().encode(
+    x='date_lost',
+    y=alt.Y('year_first_produced', scale=alt.Scale(domain=[y_min, y_max])),
+    color=alt.Color('dataset:N', scale=alt.Scale(domain=['ru', 'ua'], range=['blue', 'red']))
+).properties(width=600, height=400)
+
+st.altair_chart(average_years_chart)
+
+st.write("As time passes, both sides are using vehicles that are neither older nor newer.")
