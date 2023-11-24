@@ -14,8 +14,8 @@ from dash import Dash, html, dash_table
 import pandas as pd
 
 # Incorporate data
-ru_df = pd.read_csv('data/kaggle/losses_russia.csv')
-ua_df = pd.read_csv('data/kaggle/losses_ukraine.csv')
+ru_df = pd.read_csv('data/losses_russia.csv')
+ua_df = pd.read_csv('data/losses_ukraine.csv')
 
 # Initialize the app
 app = Dash(__name__)
