@@ -38,7 +38,7 @@ def stacked_loss_graph():
                     histfunc="count", nbinsx=500,
                     name="Russia",
                     marker=dict(color="red"))
-    fig.append_trace(fig1, row=1, col=1)
+    fig.append_trace(fig1, row=2, col=1)
     fig2 = go.Histogram(
                     x=ru_ua_concat[ru_ua_concat["user"] == "Ukraine"]["date_lost"], 
                     y=ru_ua_concat[ru_ua_concat["user"] == "Ukraine"]["user"], 
@@ -47,11 +47,11 @@ def stacked_loss_graph():
                     marker=dict(color="blue"),
                     )
     #fig2.update(yaxis_range=[0,50]) #also broken and useless
-    fig.append_trace(fig2, row=2, col=1)
+    fig.append_trace(fig2, row=1, col=1)
     fig.update_layout(height=700, width=1000, title_text="RU/UA Losses")
     fig.update_yaxes(autorange="reversed", row=2, col=1)
     fig.update_xaxes(visible=False, row=1, col=1)
-    fig.update_yaxes(range=[0,5], row=2, col=1) # completely broken and useless
+    fig.update_yaxes(range=[0,45], row=1, col=1) # completely broken and useless
     return fig
 
 def update_loss_time_graph():
