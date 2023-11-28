@@ -59,10 +59,7 @@ app = Dash(__name__)
 app.layout = html.Div([
     html.Div(children='Data Science: Week 5 exercise:'),
     html.Div(children='Exploratory charts using vehicle loss data from the War in Ukraine'),
-<<<<<<< HEAD
-=======
     html.Div(children="Team members: Alan Mackiewicz, Jin Lin, Ze Hong Wu"),
->>>>>>> 3afd3f26b5b85f5adfe7201f556221037c35015d
     html.Hr(),
     html.Div(children='View vehicle manufacturer distribution for:'),
     dcc.RadioItems(options=['Russia', 'Ukraine'], value='Ukraine', id='country-radioitem'),
@@ -87,11 +84,7 @@ app.layout = html.Div([
     ])
 ])
 
-<<<<<<< HEAD
-# Add controls to build the interaction
-=======
 # Distribution of manufacturers
->>>>>>> 3afd3f26b5b85f5adfe7201f556221037c35015d
 @callback(
     Output(component_id='manufacturer-graph', component_property='figure'),
     Input(component_id='country-radioitem', component_property='value')
@@ -103,8 +96,6 @@ def update_manufacturers_graph(col_chosen):
         figure=px.histogram(ua_df, x='manufacturer', y='losses_total', histfunc='sum')
     return figure
 
-<<<<<<< HEAD
-=======
 # Suggestions:
 # Make names readable (written horizontally)
 # Explain that "Soviet Union" means old stocks
@@ -113,7 +104,6 @@ def update_manufacturers_graph(col_chosen):
 # Display RU/UA values side by side for a better comparison
 
 # Distribution of losses
->>>>>>> 3afd3f26b5b85f5adfe7201f556221037c35015d
 @callback(
     Output(component_id='loss-graph', component_property='figure'),
     Input(component_id='country-losses-radioitem', component_property='value')
