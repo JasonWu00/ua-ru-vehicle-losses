@@ -24,7 +24,7 @@ ru_ua_dates.rename(columns={"type": "count"})
 
 def stacked_loss_graph():
     """
-    A failed attempt to create a Plotly subplot using figure objects.
+    An attempt to create a Plotly subplot using figure objects.
     Traces were too confusing for me and there seems to be no good way
     to fit figure objects into subplots.
 
@@ -48,7 +48,7 @@ def stacked_loss_graph():
                     )
     #fig2.update(yaxis_range=[0,50]) #also broken and useless
     fig.append_trace(fig2, row=1, col=1)
-    fig.update_layout(height=700, width=1000, title_text="RU/UA Losses")
+    fig.update_layout(height=700, width=1000, title_text="RU/UA Losses, above and below")
     fig.update_yaxes(autorange="reversed", row=2, col=1)
     fig.update_xaxes(visible=False, row=1, col=1)
     fig.update_yaxes(range=[0,45], row=1, col=1) # completely broken and useless
@@ -70,7 +70,8 @@ def update_loss_time_graph():
                               "count": "Vehicles lost"
                           },
                           barmode="overlay",
-                          width=1000, height=500, opacity=0.75
+                          width=1000, height=500, opacity=0.75,
+                          title="RU/UA losses, overlaid"
                           )
     # reference: https://plotly.com/python/horizontal-vertical-shapes/
     # Adding mostly transparent colored bars to denote major conflict moments
@@ -129,8 +130,58 @@ with st.sidebar:
     st.text("sidebar text")
 
 st.text("Hello, world")
-st.dataframe(ru_ua_dates)
-st.write("#### Vehicle losses over time for Russia and Ukraine, \
-         per day, from 24 February 2022 to 18 October 2023:")
+st.title('Analysis on the War in Ukraine: Vehicles lost over time')
+st.text('Author: Ze Hong Wu')
+st.markdown(
+    """
+    #### Introduction
+    For the purposes of this project, we will be analyzing data sets on known vehicle losses \
+    in Russia's invasion of Ukraine.
+    
+    The analysis in this page is based on data scraped from the \
+    [Oryx blog](https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html), \
+    which contains individual confirmed vehicles lost in Ukraine as well as \
+    image proof of their loss and (sometimes) dates when they were lost.
+
+    #### Visualizations
+
+    """
+)
 st.plotly_chart(update_loss_time_graph())
 st.plotly_chart(stacked_loss_graph())
+st.markdown(
+    """
+    #### Disclaimers
+    Due to limitations in our data acquisition and cleaning process, \
+    namely poorly formatted source data, the losses shown in this visualization represent \
+    only a subset of the whole Oryx blog data set. Many of the entries only contain \
+    loss dates as text in images, and wrangling a neural network to carry out OCR \
+    analysis on the data set is beyond the current scope of this project. Because of this, \
+    the graph above represents only part of all confirmed losses.
+
+    The data set we used was last updated on 18 October 2023. Any events that occurred \
+    after this date, such as the ongoing Russian offensive in the Avdiivka direction, \
+    are not reflected in this analysis.
+
+    #### Analysis
+    The two graphs above displays the number of dated losses, per day, from the start of the war \
+    to the current time. The first one shows them overlaid on each other, with important periods \
+    of battle highlighted with bars colored by starting country (red for Russia and blue for Ukraine).
+
+    Parts of the graph, corresponding to periods of intense battle, are marked \
+    with semi-transparent bars with the names of the battles at the top. These periods are \
+    color-coded to denote the country starting them, red for Russia and blue for Ukraine.
+
+    Notice that, during offensives launched by both sides, Ukraine consistently destroys more \
+    enemy vehicles compared to Russia. For a country who is supposedly on the verge of collapsing \
+    against a much more powerful enemy, they sure are doing a lot better than expected.
+
+    Pay special attention to the \
+    [Kharkiv counter-offensive](https://en.wikipedia.org/wiki/2022_Kharkiv_counteroffensive) \
+    portions of the graph and notice the large spike of Russian vehicle losses. \
+    Some people claim that this offensive was an abject failure and was \
+    the equivalent of the Battle of tbe Bulge. How did a so-called 'inconsequential' \
+    skirmish lead to such significant Russian losses? We will leave that as an exercise \
+    to the reader.
+    """
+)
