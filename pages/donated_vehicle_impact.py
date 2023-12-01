@@ -2,7 +2,7 @@
 
 
 Author: Alan Mackiewicz
-
+Ported to Streamlit by Ze Hong Wu.
 
 Had some trouble figuring out what to do with the donated vehicles csv but I made one nice presentation with the data so far
 
@@ -11,7 +11,7 @@ Had some trouble figuring out what to do with the donated vehicles csv but I mad
 from dash import Dash, html, dcc
 import pandas as pd
 import plotly.express as px
-
+import streamlit as st
 
 file_path = 'data/oryx/donated_vehicles.csv'  
 donated_vehicles_df = pd.read_csv(file_path)
@@ -38,15 +38,39 @@ fig.update_layout(
     margin=dict(l=150) 
 )
 
+# Copied over from the corresponding Streamlit page for vehicles lost by date.
+# ======================
+# streamlit stuff
 
-app = Dash(__name__)
+st.set_page_config(layout="wide")
+
+# This markdown line was based on this:
+# https://discuss.streamlit.io/t/cover-entire-page/26345
+st.markdown(
+    """
+    <style>
+        .main > div {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+with st.sidebar:
+    st.text("sidebar")
+
+st.title("Vehicles Donated to Ukraine Visualization")
+st.plotly_chart(fig)
+
+# app = Dash(__name__)
 
 
-app.layout = html.Div([
-    html.H1("Vehicles Donated to Ukraine Visualization"),
-    dcc.Graph(figure=fig)
-])
+# app.layout = html.Div([
+#     html.H1("Vehicles Donated to Ukraine Visualization"),
+#     dcc.Graph(figure=fig)
+# ])
 
 
-if __name__ == '__main__':
-    app.run_server(debug=True)
+# if __name__ == '__main__':
+#     app.run_server(debug=True)

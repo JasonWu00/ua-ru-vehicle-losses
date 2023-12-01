@@ -2,7 +2,7 @@
 
 
 Author: Alan Mackiewicz
-
+Ported to Streamlit by Ze Hong Wu.
 
 presented are three visuals regarding civilian impact in the war. No insight is given however but will be added shortly.
 
@@ -12,6 +12,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from dash import Dash, html, dcc, Input, Output
+import streamlit as st
 
 # Load and preprocess the datasets
 file_path_civilian_harm = 'data/civilianHarm.csv'
@@ -65,33 +66,60 @@ fig_refugee_bar_latest = px.bar(
 )
 fig_refugee_bar_latest.update_layout(title='Most Recent Number of Ukrainian Refugees by Country')
 
+# Copied over from the corresponding Streamlit page for vehicles lost by date.
+# ======================
+# streamlit stuff
 
-app = Dash(__name__)
+st.set_page_config(layout="wide")
 
-
-app.layout = html.Div([
-    html.H1("Analysis of Ukraine Conflict Data"),
-    dcc.Graph(figure=fig_timeline),
-    dcc.Graph(id='map', figure=fig_map),
-    dcc.Graph(figure=fig_refugee_bar_latest),  
-    html.Div(id='detail-visualization', children=[
-        html.H3("Detail Visualization"),
-        
-    ])
-])
-
-# Callback for the interactive map
-@app.callback(
-    Output('detail-visualization', 'children'),
-    Input('map', 'hoverData')
+# This markdown line was based on this:
+# https://discuss.streamlit.io/t/cover-entire-page/26345
+st.markdown(
+    """
+    <style>
+        .main > div {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
-def update_detail_visualization(hoverData):
-    if hoverData is not None and 'points' in hoverData:
+with st.sidebar:
+    st.text("sidebar")
 
-        # Extract hovered point's latitude and longitude
-        lat = hoverData['points'][0]['lat']
-        lon = hoverData['points'][0]['lon']
+st.title("Analysis of Ukraine Conflict Data")
+st.text("Placeholder text.")
+st.plotly_chart(fig_timeline)
+st.plotly_chart(fig_map)
+st.plotly_chart(fig_refugee_bar_latest)
+
+# app = Dash(__name__)
+
+
+# app.layout = html.Div([
+#     html.H1("Analysis of Ukraine Conflict Data"),
+#     dcc.Graph(figure=fig_timeline),
+#     dcc.Graph(id='map', figure=fig_map),
+#     dcc.Graph(figure=fig_refugee_bar_latest),  
+#     html.Div(id='detail-visualization', children=[
+#         html.H3("Detail Visualization"),
+        
+#     ])
+# ])
+
+# # Callback for the interactive map
+# @app.callback(
+#     Output('detail-visualization', 'children'),
+#     Input('map', 'hoverData')
+# )
+# def update_detail_visualization(hoverData):
+#     if hoverData is not None and 'points' in hoverData:
+
+#         # Extract hovered point's latitude and longitude
+#         lat = hoverData['points'][0]['lat']
+#         lon = hoverData['points'][0]['lon']
         
 
-if __name__ == '__main__':
-    app.run_server(debug=True)
+# if __name__ == '__main__':
+#     app.run_server(debug=True)
