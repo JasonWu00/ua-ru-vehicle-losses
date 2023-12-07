@@ -1,3 +1,9 @@
+"""
+Author: Jin Lin
+Ported to Streamlit by Ze Hong Wu.
+"""
+
+
 # import library
 import pandas as pd
 import streamlit as st
@@ -87,7 +93,7 @@ st.title("Heatmap for Age of Vehicles That Were Destroyed - Russia (RU)")
 
 # Filter data for every 2 months in 2022 for RU
 heatmap_data_ru = df[df['year'] == 22].groupby(['year_first_produced', 'month']).size().unstack(fill_value=0)
-#heatmap_data_ru = heatmap_data_ru.loc[heatmap_data_ru.index % 2 == 0, heatmap_data_ru.columns % 1 == 0]
+
 
 plt.figure(figsize=(15, 10))
 if not heatmap_data_ru.empty:
@@ -103,7 +109,7 @@ st.title("Heatmap for Age of Vehicles That Were Destroyed - Ukraine (UA)")
 
 # Filter data for every 2 months in 2022 for UA
 heatmap_data_ua = df2[df2['year'] == 22].groupby(['year_first_produced', 'month']).size().unstack(fill_value=0)
-#heatmap_data_ua = heatmap_data_ua.loc[heatmap_data_ua.index % 1 == 0, heatmap_data_ua.columns % 1 == 0]
+
 
 plt.figure(figsize=(15, 10))
 if not heatmap_data_ua.empty:
