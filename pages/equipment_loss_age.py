@@ -3,10 +3,13 @@ Author: Jin Lin
 Ported to Streamlit by Ze Hong Wu.
 """
 
+
 # import library
 import pandas as pd
 import streamlit as st
 import altair as alt
+import seaborn as sns  # Add this import
+import matplotlib.pyplot as plt  # Add this import
 from sklearn.linear_model import LinearRegression
 
 # Load the CSV data
@@ -20,62 +23,9 @@ df2 = df2.dropna()
 # Combine the two DataFrames
 combined_df = pd.concat([df.assign(dataset='ru'), df2.assign(dataset='ua')])
 
-# Create a Streamlit Scatter Plot
-st.title("Year First Produced vs Destroyed Date")
-
-# Add a toggle button to show/hide 'ru' data for Scatter Plot
-show_ru_scatter = st.checkbox('Show RU Data (Scatter)', value=True)
-
-# Add a toggle button to show/hide 'ua' data for Scatter Plot
-show_ua_scatter = st.checkbox('Show UA Data (Scatter)', value=True)
-
 # Set the y-axis limits
 y_min = 1940
 y_max = 2030
-
-# Filter the DataFrame based on user input for Scatter Plot
-filtered_df_scatter = combined_df[((combined_df['dataset'] == 'ru') & show_ru_scatter) | ((combined_df['dataset'] == 'ua') & show_ua_scatter)]
-
-scatter_chart = alt.Chart(filtered_df_scatter).mark_circle(size=60).encode(
-    x='date_lost',
-    y=alt.Y('year_first_produced', scale=alt.Scale(domain=[y_min, y_max])),
-    color=alt.Color('dataset:N', scale=alt.Scale(domain=['ru', 'ua'], range=['blue', 'red']))
-).properties(width=600, height=400)
-
-st.altair_chart(scatter_chart)
-
-st.write("There are rumors that the reason why the war between Russia and Ukraine is prolonged is because Russia does not take the war seriously. They are using older and older vehicles.")
-
-
-
-# Below is the Second Chart
-
-# Create a Streamlit Line Chart
-st.title("Average Year First Produced vs Destroyed Date")
-
-# Add a toggle button to show/hide 'ru' data for Line Chart
-show_ru_line = st.checkbox('Show RU Data (Line)', value=True)
-
-# Add a toggle button to show/hide 'ua' data for Line Chart
-show_ua_line = st.checkbox('Show UA Data (Line)', value=True)
-
-# Filter the DataFrame based on user input for Line Chart
-filtered_df_line = combined_df[((combined_df['dataset'] == 'ru') & show_ru_line) | ((combined_df['dataset'] == 'ua') & show_ua_line)]
-
-# Create a second chart to calculate the average "year_first_produced" for each "date_lost"
-average_years = filtered_df_line.groupby(["dataset", "date_lost"])["year_first_produced"].mean().reset_index()
-average_years_chart = alt.Chart(average_years).mark_line().encode(
-    x='date_lost',
-    y=alt.Y('year_first_produced', scale=alt.Scale(domain=[y_min, y_max])),
-    color=alt.Color('dataset:N', scale=alt.Scale(domain=['ru', 'ua'], range=['blue', 'red']))
-).properties(width=600, height=400)
-
-st.altair_chart(average_years_chart)
-
-st.write("This chart displays the average age of vehicles that were destroyed on a specified date. However, it is not very clear whether each side is using newer or older vehicles.")
-
-
-
 
 # Below is the Third Chart
 
@@ -134,3 +84,38 @@ else:
     st.warning("Please select at least one dataset to display.")    
     
 st.write("As time passes, Ukraine tends to deploy newer vehicles, reflecting potential efforts to modernize its military capabilities. In contrast, Russia appears to rely on a mix of older and not necessarily newer equipment. The age and condition of lost equipment vary by type on both sides. This disparity might suggest that Ukraine is actively investing in modernization and maintaining a higher readiness level, while Russia is not inclined to escalate the conflict into a larger war.")
+
+
+
+
+# Create a heatmap for RU
+st.title("Heatmap for Age of Vehicles That Were Destroyed - Russia (RU)")
+
+# Filter data for every 2 months in 2022 for RU
+heatmap_data_ru = df[df['year'] == 22].groupby(['year_first_produced', 'month']).size().unstack(fill_value=0)
+
+
+plt.figure(figsize=(15, 10))
+if not heatmap_data_ru.empty:
+    sns.heatmap(heatmap_data_ru, cmap="YlGnBu", annot=True, fmt="d", linewidths=.5)
+    plt.xlabel("Month Lost(2022)")
+    plt.ylabel("Year First Produced")
+    st.pyplot(plt)
+else:
+    st.title("No data to create the heatmap for RU")
+
+# Create a heatmap for UA
+st.title("Heatmap for Age of Vehicles That Were Destroyed - Ukraine (UA)")
+
+# Filter data for every 2 months in 2022 for UA
+heatmap_data_ua = df2[df2['year'] == 22].groupby(['year_first_produced', 'month']).size().unstack(fill_value=0)
+
+
+plt.figure(figsize=(15, 10))
+if not heatmap_data_ua.empty:
+    sns.heatmap(heatmap_data_ua, cmap="YlGnBu", annot=True, fmt="d", linewidths=.5)
+    plt.xlabel("Month Lost(2022)")
+    plt.ylabel("Year First Produced")
+    st.pyplot(plt)
+else:
+    st.title("No data to create the heatmap for UA")
