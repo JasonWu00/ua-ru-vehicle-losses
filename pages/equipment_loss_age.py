@@ -87,35 +87,3 @@ st.write("As time passes, Ukraine tends to deploy newer vehicles, reflecting pot
 
 
 
-
-# Create a heatmap for RU
-st.title("Heatmap for Age of Vehicles That Were Destroyed - Russia (RU)")
-
-# Filter data for every 2 months in 2022 for RU
-heatmap_data_ru = df[df['year'] == 22].groupby(['year_first_produced', 'month']).size().unstack(fill_value=0)
-
-
-plt.figure(figsize=(15, 10))
-if not heatmap_data_ru.empty:
-    sns.heatmap(heatmap_data_ru, cmap="YlGnBu", annot=True, fmt="d", linewidths=.5)
-    plt.xlabel("Month Lost(2022)")
-    plt.ylabel("Year First Produced")
-    st.pyplot(plt)
-else:
-    st.title("No data to create the heatmap for RU")
-
-# Create a heatmap for UA
-st.title("Heatmap for Age of Vehicles That Were Destroyed - Ukraine (UA)")
-
-# Filter data for every 2 months in 2022 for UA
-heatmap_data_ua = df2[df2['year'] == 22].groupby(['year_first_produced', 'month']).size().unstack(fill_value=0)
-
-
-plt.figure(figsize=(15, 10))
-if not heatmap_data_ua.empty:
-    sns.heatmap(heatmap_data_ua, cmap="YlGnBu", annot=True, fmt="d", linewidths=.5)
-    plt.xlabel("Month Lost(2022)")
-    plt.ylabel("Year First Produced")
-    st.pyplot(plt)
-else:
-    st.title("No data to create the heatmap for UA")
