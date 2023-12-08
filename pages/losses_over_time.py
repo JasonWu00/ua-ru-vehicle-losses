@@ -129,7 +129,7 @@ st.markdown(
 with st.sidebar:
     st.text("sidebar text")
 
-st.text("Hello, world")
+#st.text("Hello, world")
 st.title('Analysis on the War in Ukraine: Vehicles lost over time')
 st.text('Author: Ze Hong Wu')
 st.markdown(
