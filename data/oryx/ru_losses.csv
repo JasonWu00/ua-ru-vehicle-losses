@@ -1805,7 +1805,7 @@ id,name,type,status,day,month,year,manufacturer,manufacturer_abbr,user,user_abbr
 1804,T-80BV,Tanks,captured,31.0,10.0,22.0,Soviet Union,USSR,Russia,RU,https://postlmg.cc/15nMCvcY,1985.0,2022-10-31
 1805,T-80BV,Tanks,captured,,,,Soviet Union,USSR,Russia,RU,https://postlmg.cc/X7GD7K2Y,1985.0,2022-02-28
 1806,T-80BV,Tanks,captured,13.0,9.0,22.0,Soviet Union,USSR,Russia,RU,https://postlmg.cc/PxC7dQHG,1985.0,2022-09-13
-1807,T-80BV Obr. 2022,Tanks,destroyed,7.0,1.0,22.0,Russia,RU,Russia,RU,https://postlmg.cc/C506Q84w,2022.0,2022-01-07
+1807,T-80BV Obr. 2022,Tanks,destroyed,1.0,7.0,22.0,Russia,RU,Russia,RU,https://postlmg.cc/C506Q84w,2022.0,2022-07-01
 1808,T-80BV Obr. 2022,Tanks,destroyed,28.0,7.0,22.0,Russia,RU,Russia,RU,https://postlmg.cc/k5ZhJBqw,2022.0,2022-07-28
 1809,T-80BV Obr. 2022,Tanks,destroyed,27.0,6.0,23.0,Russia,RU,Russia,RU,https://postlmg.cc/mhWsgDrL,2022.0,2023-06-27
 1810,T-80BV Obr. 2022,Tanks,destroyed,2.0,8.0,23.0,Russia,RU,Russia,RU,https://postlmg.cc/sDdrP7wV,2022.0,2023-08-02
@@ -7129,7 +7129,7 @@ id,name,type,status,day,month,year,manufacturer,manufacturer_abbr,user,user_abbr
 7128,R-166-0.5 signals vehicle,Command Posts and Communications Stations,destroyed,,,,Russia,RU,Russia,RU,https://postlmg.cc/mrPwppT2,,2022-04-22
 7129,R-166-0.5 signals vehicle,Command Posts and Communications Stations,destroyed,,,,Russia,RU,Russia,RU,https://postlmg.cc/4x9D2k4v,,2022-04-22
 7130,R-166-0.5 signals vehicle,Command Posts and Communications Stations,destroyed,30.0,7.0,22.0,Russia,RU,Russia,RU,https://postlmg.cc/JnHJv3H4,,2022-07-30
-7131,R-166-0.5 signals vehicle,Command Posts and Communications Stations,destroyed,4.0,1.0,22.0,Russia,RU,Russia,RU,https://postlmg.cc/90yCPKKv,,2022-01-04
+7131,R-166-0.5 signals vehicle,Command Posts and Communications Stations,destroyed,1.0,4.0,22.0,Russia,RU,Russia,RU,https://postlmg.cc/90yCPKKv,,2022-04-01
 7132,R-166-0.5 signals vehicle,Command Posts and Communications Stations,destroyed,,,,Russia,RU,Russia,RU,https://twitter.com/Danspiun/status/1569384896899997699,,
 7133,R-166-0.5 signals vehicle,Command Posts and Communications Stations,destroyed,,,,Russia,RU,Russia,RU,https://postlmg.cc/3W9VWgDQ,,
 7134,R-166-0.5 signals vehicle,Command Posts and Communications Stations,destroyed,29.0,9.0,22.0,Russia,RU,Russia,RU,https://postlmg.cc/bvH982yp,,2022-09-29
