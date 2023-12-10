@@ -1,34 +1,42 @@
 """
+Copyright (C) 2023 Ze Hong Wu, Alan Mackiewicz
 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-Author: Alan Mackiewicz
-Ported to Streamlit by Ze Hong Wu.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-Provided is the homepage I propose for the project. I thought it would be a good idea to take random comments on
-the internet about the war and present them like a tweet that changes every once in a while. The hyperlinks do not work right now 
-I wasnt sure how to make them work at the moment.
-
-
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>
 """
 
 import dash
-from dash import html, dcc
-from dash.dependencies import Input, Output
+#from dash import html, dcc
+#from dash.dependencies import Input, Output
 import pandas as pd
-import random
+#import random
 import streamlit as st
 
 
 file_path_comments = 'data/comments_data.csv'
 comments_df = pd.read_csv(file_path_comments)
 
-app = dash.Dash(__name__, suppress_callback_exceptions=True)
+#app = dash.Dash(__name__, suppress_callback_exceptions=True)
 
 
 st.markdown("<h1 style='text-align: center;'>Ukraine Russia Conflict Dashboard</h1>", unsafe_allow_html=True)
 # Streamlit handles the nav menu in the left sidebar by default
 # I am not recreating the Twitter box thing since class time is not far away.
 st.markdown("Authors: Jin Lin, Alan Mackiewitz, Ze Hong Wu")
+
+# The following text is from a prior iteration of this file rendered in Dash.
+# I have left the code here in case we need it in the future.
+# - Ze Hong Wu
 
 # app.layout = html.Div([
 #     html.H1("Ukraine Russia Conflict Dashboard", style={'textAlign': 'center'}),

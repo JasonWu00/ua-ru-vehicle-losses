@@ -1,7 +1,20 @@
 """
-This file contains Python code for a Streamlit app.
+This page discusses the distributions of lost vehicles by date lost.
 
-Author: Ze Hong Wu
+Copyright (C) 2023 Ze Hong Wu
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 Anyone who edits this file and pushes their changes to master or Pull Requests their changes
 should also add their name to this docstring.
@@ -44,14 +57,14 @@ def stacked_loss_graph():
                     y=ru_ua_concat[ru_ua_concat["user"] == "Ukraine"]["user"], 
                     histfunc="count", nbinsx=500,
                     name="Ukraine",
-                    marker=dict(color="blue"),
+                    marker=dict(color="light blue"),
                     )
     #fig2.update(yaxis_range=[0,50]) #also broken and useless
     fig.append_trace(fig2, row=1, col=1)
     fig.update_layout(height=700, width=1000, title_text="RU/UA Losses, above and below")
     fig.update_yaxes(autorange="reversed", row=2, col=1)
     fig.update_xaxes(visible=False, row=1, col=1)
-    fig.update_yaxes(range=[0,45], row=1, col=1) # completely broken and useless
+    fig.update_yaxes(range=[0,140], row=1, col=1) # completely broken and useless
     return fig
 
 def update_loss_time_graph():
@@ -62,7 +75,7 @@ def update_loss_time_graph():
     #print(ru_ua_dates.reset_index())
     figure = px.histogram(ru_ua_concat, x="date_lost", y="user", histfunc="count",
                           color="user",
-                          color_discrete_map={"Russia": "red", "Ukraine": "blue"},
+                          color_discrete_map={"Russia": "red", "Ukraine": "light blue"},
                           nbins=500,
                           labels={
                               "date_lost": "Date",
@@ -97,7 +110,7 @@ def update_loss_time_graph():
                     annotation_text="Zaporizhzhia", annotation_position="top left",
                     fillcolor="blue", opacity=0.25, line_width=0)
     figure.update_yaxes(
-        range=(0, 50),
+        range=(0, 140),
         constrain='domain'
     )
     # the last cleaned data doesn't go up to the failed Russian offensive against
