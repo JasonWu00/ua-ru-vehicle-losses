@@ -3513,7 +3513,7 @@ id,name,type,status,day,month,year,manufacturer,manufacturer_abbr,user,user_abbr
 3512,Bukovel-AD EW system,Jammers and Deception Systems,destroyed,14.0,6.0,23.0,Ukraine,UA,Ukraine,UA,https://postlmg.cc/NGPvP3ND,2016.0,2023-06-14
 3513,Bukovel-AD EW system,Jammers and Deception Systems,destroyed,15.0,6.0,23.0,Ukraine,UA,Ukraine,UA,https://postlmg.cc/B65L5Xf4,2016.0,2023-06-15
 3514,MiG-29 fighter aircraft,Aircraft,destroyed,,,,Soviet Union,USSR,Ukraine,UA,https://postlmg.cc/XYtgd1XH,1983.0,
-3515,MiG-29 fighter aircraft,Aircraft,destroyed,29.0,8.0,8.0,Soviet Union,USSR,Ukraine,UA,https://postlmg.cc/VkzvHPwD,1983.0,2008-08-29
+3515,MiG-29 fighter aircraft,Aircraft,destroyed,8.0,8.0,22.0,Soviet Union,USSR,Ukraine,UA,https://postlmg.cc/VkzvHPwD,1983.0,2022-08-08
 3516,MiG-29 fighter aircraft,Aircraft,destroyed,,,,Soviet Union,USSR,Ukraine,UA,https://postlmg.cc/bYGXz89F,1983.0,
 3517,MiG-29 fighter aircraft,Aircraft,destroyed,,,,Soviet Union,USSR,Ukraine,UA,https://postlmg.cc/tC7ZDK50,1983.0,
 3518,MiG-29 fighter aircraft,Aircraft,destroyed,,,,Soviet Union,USSR,Ukraine,UA,https://postlmg.cc/LsbV0JrJ,1983.0,
@@ -3687,7 +3687,7 @@ id,name,type,status,day,month,year,manufacturer,manufacturer_abbr,user,user_abbr
 3686,A1-SM Fury,Reconnaissance Unmanned Aerial Vehicles,captured,,,,Ukraine,UA,Ukraine,UA,https://postlmg.cc/QdQQwy4B,2023.0,2022-11-27
 3687,A1-SM Fury,Reconnaissance Unmanned Aerial Vehicles,captured,,,,Ukraine,UA,Ukraine,UA,https://postlmg.cc/TY7bG6hy,2023.0,2022-12-12
 3688,A1-SM Fury,Reconnaissance Unmanned Aerial Vehicles,captured,5.0,1.0,23.0,Ukraine,UA,Ukraine,UA,https://postlmg.cc/Ss0Jw2np,2023.0,2023-01-05
-3689,A1-SM Fury,Reconnaissance Unmanned Aerial Vehicles,captured,1.0,12.0,23.0,Ukraine,UA,Ukraine,UA,https://postlmg.cc/vTZ3nBwT,2023.0,2023-12-01
+3689,A1-SM Fury,Reconnaissance Unmanned Aerial Vehicles,captured,12.0,1.0,23.0,Ukraine,UA,Ukraine,UA,https://postlmg.cc/vTZ3nBwT,2023.0,2023-01-12
 3690,A1-SM Fury,Reconnaissance Unmanned Aerial Vehicles,captured,31.0,1.0,23.0,Ukraine,UA,Ukraine,UA,https://postlmg.cc/XqNxtDsK,2023.0,2023-01-31
 3691,A1-SM Fury,Reconnaissance Unmanned Aerial Vehicles,captured,30.0,1.0,23.0,Ukraine,UA,Ukraine,UA,https://postlmg.cc/9X1LyCfL,2023.0,2023-01-30
 3692,A1-SM Fury,Reconnaissance Unmanned Aerial Vehicles,captured,18.0,2.0,23.0,Ukraine,UA,Ukraine,UA,https://postlmg.cc/Nf4sWv8D,2023.0,2023-02-18

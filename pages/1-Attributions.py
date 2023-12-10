@@ -1,8 +1,20 @@
 """
-This file contains Python code for a Streamlit page.
 This page discusses the sources of the data used for this project.
 
-Author: Ze Hong Wu
+Copyright (C) 2023 Ze Hong Wu
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>
 
 Anyone who edits this file and pushes their changes to master or Pull Requests their changes
 should also add their name to this docstring.
