@@ -106,6 +106,7 @@ with st.sidebar:
     st.text("sidebar")
 
 st.title("Civilian Impact")
+st.text('Author: Alan Mackiewicz')
 st.plotly_chart(fig_timeline)
 st.text("""
 ***Disclaimer*** Missile data is not available for start of conflict
