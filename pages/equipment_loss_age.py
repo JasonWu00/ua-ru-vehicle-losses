@@ -22,7 +22,7 @@ df_ua = df_ua.dropna()
 # Streamlit app
 st.title("Military Vehicle Losses")
 
-
+st.text('Author: Jin Lin')
 # Toggle buttons for displaying Russian and Ukrainian histograms
 show_ru_histogram = st.checkbox('Show Russian Histogram', value=True)
 show_ua_histogram = st.checkbox('Show Ukrainian Histogram', value=True)
@@ -49,7 +49,8 @@ fig_combined.update_layout(
 # Show combined chart
 st.plotly_chart(fig_combined)
 
-
+st.title("***Disclaimer*** ")
+st.write("The data spans only from 2022 to 2023.")
 st.write("There are people saying that Russia is using older and older vehicles. This page is made\
          in response to those Unsubstantiated claims. Compared to the situation in Ukraine, there is no clear \
          evidence that Russia is using older vehicles.")
