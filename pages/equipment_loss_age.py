@@ -3,87 +3,102 @@ Author: Jin Lin
 Ported to Streamlit by Ze Hong Wu.
 """
 
-
-# import library
+# Import library
 import pandas as pd
 import streamlit as st
-import altair as alt
-import seaborn as sns  # Add this import
-import matplotlib.pyplot as plt  # Add this import
-from sklearn.linear_model import LinearRegression
+import plotly.express as px
+import plotly.io as pio
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 
 # Load the CSV data
-df = pd.read_csv("data/oryx/ru_losses.csv")
-df2 = pd.read_csv("data/oryx/ua_losses.csv")
+df_ru = pd.read_csv("data/oryx/ru_losses.csv")
+df_ua = pd.read_csv("data/oryx/ua_losses.csv")
 
 # Drop rows with null values
-df = df.dropna()
-df2 = df2.dropna()
+df_ru = df_ru.dropna()
+df_ua = df_ua.dropna()
 
-# Combine the two DataFrames
-combined_df = pd.concat([df.assign(dataset='ru'), df2.assign(dataset='ua')])
-
-# Set the y-axis limits
-y_min = 1940
-y_max = 2030
-
-# Below is the Third Chart
-
-# Create a Streamlit Line Chart
-st.title("Regression Lines for Age of Vehicles That Were Destroyed")
-
-combined_df['date_lost'] = pd.to_datetime(combined_df['date_lost']).dt.year
-
-# Add a toggle button to show/hide 'ru' data for Line Chart
-show_ru_reg_line = st.checkbox('Show RU Data (Reg_Line)', value=True)
-
-# Add a toggle button to show/hide 'ua' data for Line Chart
-show_ua_reg_line = st.checkbox('Show UA Data (Reg_Line)', value=True)
-
-# Filter the DataFrame based on user input for Line Chart
-filtered_df_ru = combined_df[(combined_df['dataset'] == 'ru') & show_ru_reg_line]
-filtered_df_ua = combined_df[(combined_df['dataset'] == 'ua') & show_ua_reg_line]
-
-# Check if either dataset is selected
-if not filtered_df_ru.empty or not filtered_df_ua.empty:
-    # Create a Linear Regression model for RU data if 'ru' data is selected
-    if not filtered_df_ru.empty:
-        regression_model_ru = LinearRegression()
-        regression_model_ru.fit(filtered_df_ru[['date_lost']], filtered_df_ru['year_first_produced'])
-        line_of_best_fit_ru = pd.DataFrame({
-            'date_lost': filtered_df_ru['date_lost'],
-            'year_first_produced': regression_model_ru.predict(filtered_df_ru[['date_lost']])
-        })
-        chart_ru = alt.Chart(line_of_best_fit_ru).mark_line(color='red').encode(
-            x='date_lost',
-            y=alt.Y('year_first_produced', scale=alt.Scale(domain=[y_min, y_max]))
-        )
-    else:
-        chart_ru = alt.Chart().mark_point()
-
-    # Create a Linear Regression model for UA data if 'ua' data is selected
-    if not filtered_df_ua.empty:
-        regression_model_ua = LinearRegression()
-        regression_model_ua.fit(filtered_df_ua[['date_lost']], filtered_df_ua['year_first_produced'])
-        line_of_best_fit_ua = pd.DataFrame({
-            'date_lost': filtered_df_ua['date_lost'],
-            'year_first_produced': regression_model_ua.predict(filtered_df_ua[['date_lost']])
-        })
-        chart_ua = alt.Chart(line_of_best_fit_ua).mark_line(color='blue').encode(
-            x='date_lost',
-            y=alt.Y('year_first_produced', scale=alt.Scale(domain=[y_min, y_max]))
-        )
-    else:
-        chart_ua = alt.Chart().mark_point()
-
-    # Combine both charts
-    line_chart = chart_ru + chart_ua
-
-    st.altair_chart(line_chart)
-else:
-    st.warning("Please select at least one dataset to display.")    
-    
-st.write("As time passes, Ukraine tends to deploy newer vehicles, reflecting potential efforts to modernize its military capabilities. In contrast, Russia appears to rely on a mix of older and not necessarily newer equipment. The age and condition of lost equipment vary by type on both sides. This disparity might suggest that Ukraine is actively investing in modernization and maintaining a higher readiness level, while Russia is not inclined to escalate the conflict into a larger war.")
+# Streamlit app
+st.title("Military Vehicle Losses")
 
 
+# Toggle buttons for displaying Russian and Ukrainian histograms
+show_ru_histogram = st.checkbox('Show Russian Histogram', value=True)
+show_ua_histogram = st.checkbox('Show Ukrainian Histogram', value=True)
 
+# Combine histograms using Plotly
+fig_combined = go.Figure()
+
+# Add Russian histogram if the button is checked
+if show_ru_histogram:
+    fig_combined.add_trace(go.Histogram(x=df_ru["year_first_produced"], nbinsx=20, name="Russian"))
+
+# Add Ukrainian histogram if the button is checked
+if show_ua_histogram:
+    fig_combined.add_trace(go.Histogram(x=df_ua["year_first_produced"], nbinsx=20, name="Ukrainian"))
+
+# Update layout for the combined chart
+fig_combined.update_layout(
+    title_text="Combined Histogram of Production Year",
+    xaxis_title="Production Year",
+    yaxis_title="Count",
+    barmode="overlay"
+)
+
+# Show combined chart
+st.plotly_chart(fig_combined)
+
+
+st.write("There are people saying that Russia is using older and older vehicles. This page is made\
+         in response to those Unsubstantiated claims. Compared to the situation in Ukraine, there is no clear \
+         evidence that Russia is using older vehicles.")
+
+# below is the second chart
+
+# reference https://www.nomidl.com/projects/russia-ukraine-war-data-analysis-project-using-python/#google_vignette
+
+# Set Plotly template
+pio.templates.default = 'plotly_dark'
+color_theme = px.colors.qualitative.Antique
+
+# Read data
+df3 = pd.read_csv('data/russia_losses_equipment.csv')
+
+# Drop unnecessary columns
+df3.drop(columns=['mobile SRBM system', 'military auto', 'fuel tank', 'vehicles and fuel tanks'], inplace=True)
+
+
+# Create Streamlit app
+st.title('Russia Equipment Losses')
+
+# Plotly figure
+fig = go.Figure()
+
+titles = ["Aircraft", "Helicopter", "Drone"]  
+columns_to_plot = [2, 3, 8]
+
+fig = make_subplots(rows=1, cols=3, subplot_titles=titles)
+
+for i, col_index in enumerate(columns_to_plot, 1):
+    fig.add_trace(go.Scatter(x=df3['date'], name=titles[i-1], y=df3.iloc[:, col_index]),
+                  row=1, col=i)
+
+fig.update_layout(showlegend=True)
+
+# Update layout
+fig.update_layout(title='Russia Equipment Losses', showlegend=False, height=350, width=250)
+
+fig.update_xaxes(dtick='M5', tick0=df3['date'].iloc[0])
+
+fig.update_layout(font_color='#11DEC6')
+
+# Display the figure in Streamlit app
+st.plotly_chart(fig, use_container_width=True)
+
+st.write("At the beginning of the war, Russia suffered significant losses of aircraft and \
+         helicopters. However, the rate of aircraft and helicopter losses for Russia quickly \
+         decreased. This could be due to various reasons. One possibility is that Russia decided \
+         to switch to drones. It can be observed that while the loss rate for aircraft and \
+         helicopters is decreasing, the loss rate for drones is increasing. This may also be \
+         one of the reasons why people think Russia is using increasingly older equipment.")
