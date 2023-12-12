@@ -107,6 +107,7 @@ with st.sidebar:
 
 st.title("Civilian Impact")
 st.text('Author: Alan Mackiewicz')
+st.markdown("""Data on this page is sourced from [Bellingcat](https://ukraine.bellingcat.com)""")
 st.plotly_chart(fig_timeline)
 st.text("""
 ***Disclaimer*** Missile data is not available for start of conflict
