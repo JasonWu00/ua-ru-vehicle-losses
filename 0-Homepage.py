@@ -34,6 +34,18 @@ st.markdown("<h1 style='text-align: center;'>Ukraine Russia Conflict Dashboard</
 # I am not recreating the Twitter box thing since class time is not far away.
 st.markdown("Authors: Jin Lin, Alan Mackiewitz, Ze Hong Wu")
 
+st.markdown("""
+When was the last time you thought about the war in Ukraine?
+
+Have you, between 24 February 2022 and now, seen or heard any of these statements?
+* The Kyiv offensive is a feint
+* The Kharkiv / Kherson battles are futile gestures, Russia has lost nothing at all
+* Russia has destroyed 60 HIMARS (or some other large number of Western equipment)
+
+If you have heard or seen one or more of these statements, or other similar statements, \
+and want to know if any of them are legitimate, keep reading.
+""")
+
 # The following text is from a prior iteration of this file rendered in Dash.
 # I have left the code here in case we need it in the future.
 # - Ze Hong Wu
