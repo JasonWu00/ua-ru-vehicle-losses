@@ -23,7 +23,7 @@ should also add their name to this docstring.
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
@@ -45,19 +45,19 @@ def stacked_loss_graph():
     """
     #go.Figure(data=[go.Histogram(ru_ua_concat, x="date_lost", y="user", histfunc="count")])
     fig = make_subplots(rows=2, cols=1, vertical_spacing=0.00)
-    fig1 = go.Histogram( 
+    fig1 = go.Histogram(
                     x=ru_ua_concat[ru_ua_concat["user"] == "Russia"]["date_lost"], 
                     y=ru_ua_concat[ru_ua_concat["user"] == "Russia"]["user"], 
                     histfunc="count", nbinsx=500,
                     name="Russia",
-                    marker=dict(color="red"))
+                    marker={"color": "red"})
     fig.append_trace(fig1, row=2, col=1)
     fig2 = go.Histogram(
                     x=ru_ua_concat[ru_ua_concat["user"] == "Ukraine"]["date_lost"], 
                     y=ru_ua_concat[ru_ua_concat["user"] == "Ukraine"]["user"], 
                     histfunc="count", nbinsx=500,
                     name="Ukraine",
-                    marker=dict(color="light blue"),
+                    marker={"color": "light blue"},
                     )
     #fig2.update(yaxis_range=[0,50]) #also broken and useless
     fig.append_trace(fig2, row=1, col=1)
@@ -152,7 +152,8 @@ st.markdown(
     in Russia's invasion of Ukraine.
     
     The analysis in this page is based on data scraped from the \
-    [Oryx blog](https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html), \
+    [Oryx blog]\
+        (https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html), \
     which contains individual confirmed vehicles lost in Ukraine as well as \
     image proof of their loss and (sometimes) dates when they were lost.
 
@@ -179,7 +180,8 @@ st.markdown(
     #### Analysis
     The two graphs above displays the number of dated losses, per day, from the start of the war \
     to the current time. The first one shows them overlaid on each other, with important periods \
-    of battle highlighted with bars colored by starting country (red for Russia and blue for Ukraine).
+    of battle highlighted with bars colored by starting country \
+    (red for Russia and blue for Ukraine).
 
     Parts of the graph, corresponding to periods of intense battle, are marked \
     with semi-transparent bars with the names of the battles at the top. These periods are \
