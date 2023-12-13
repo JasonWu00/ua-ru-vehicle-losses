@@ -41,23 +41,23 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-with st.sidebar:
-    st.text("sidebar text")
 
 st.title('Attributions: Sources for our data')
 st.text('Author: Ze Hong Wu')
 st.markdown(
     """
-    Our primary source of data is the \
-    [Oryx blog](https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html), \
-    which contains individual confirmed vehicles lost in Ukraine as well as \
-    image proof of their loss and (sometimes) dates when they were lost.
+Our primary source of data is the \
+[Oryx blog](https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html), \
+which contains individual confirmed vehicles lost in Ukraine as well as \
+image proof of their loss and (sometimes) dates when they were lost.
 
-    We chose this source of data for the following reasons:
-    - the people maintaining the blog inspects each new entry to ensure that it is:
-      - it is real
-      - it is not a duplicate of a previous entry
-      - it pertains to the conflict in Ukraine
-    - every entry has an image proof attached
-    """
-)
+We chose this source of data for the following reasons:
+- the people maintaining the blog inspects each new entry to ensure that it is:
+    - it is real
+    - it is not a duplicate of a previous entry
+    - it pertains to the conflict in Ukraine
+- every entry has an image proof attached
+
+While the data quality has room for improvement, its status as a verified minimum baseline \
+made the Oryx blog our primary data source.
+""")

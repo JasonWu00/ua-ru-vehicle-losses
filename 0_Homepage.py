@@ -28,14 +28,26 @@ comments_df = pd.read_csv('data/comments_data.csv')
 
 #app = dash.Dash(__name__, suppress_callback_exceptions=True)
 
+st.markdown(
+    """
+    <style>
+        .main > div {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-st.markdown("<h1 style='text-align: center;'>Ukraine Russia Conflict Dashboard</h1>", 
+st.markdown("<h1 style='text-align: center;'>\"Novorossiya\": Analysis on the War in Ukraine</h1>",
             unsafe_allow_html=True)
 # Streamlit handles the nav menu in the left sidebar by default
 # I am not recreating the Twitter box thing since class time is not far away.
-st.markdown("Authors: Jin Lin, Alan Mackiewitz, Ze Hong Wu")
+st.text("Authors: Alan Mackiewitz, Jin Lin, Ze Hong Wu")
 
-st.markdown("""
+st.markdown(
+"""
 When was the last time you thought about the war in Ukraine?
 
 Have you, between 24 February 2022 and now, seen or heard any of these statements?
@@ -44,7 +56,8 @@ Have you, between 24 February 2022 and now, seen or heard any of these statement
 * Russia has destroyed 60 HIMARS (or some other large number of Western equipment)
 
 If you have heard or seen one or more of these statements, or other similar statements, \
-and want to know if any of them are legitimate, keep reading.
+and want to know if any of them are legitimate, the pages listed on the left sidebar \
+might provide some useful context.
 """)
 
 # There used to be Dash code here. It's been nuked.
