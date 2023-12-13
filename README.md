@@ -25,7 +25,7 @@ Our project touches upon the following topics:
 
 This project uses the following languages, technologies, and libraries:
 
-For scraping and processing the data sets:
+For scraping and processing the data sets (as we did [here](https://github.com/JasonWu00/ua-ru-losses-scraper/)):
 * Python
   * BeautifulSoup
   * Requests
