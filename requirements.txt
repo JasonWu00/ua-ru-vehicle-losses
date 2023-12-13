@@ -2,6 +2,3 @@ pandas
 matplotlib
 plotly
 streamlit
-bs4
-requests
-re
