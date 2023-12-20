@@ -13,6 +13,8 @@ If you have heard or seen one or more of these statements, or other similar stat
 
 This project uses publicly available data sets on Russia's invasion of Ukraine, most notably the [Oryx blog](https://www.oryxspioenkop.com/2022/02/attack-on-europe-documenting-equipment.html), to derive correlations and make conclusions on the state of the conflict.
 
+Our project is deployed onto Streamlit; see [here](https://ua-ru-vehicle-losses.streamlit.app).
+
 Our project touches upon the following topics:
 * The distribution of visually confirmed lost vehicles, for both sides, from the start of the war to recently
 * The state of the vehicles lost (judged using their years of production)
@@ -23,7 +25,7 @@ Our project touches upon the following topics:
 
 This project uses the following languages, technologies, and libraries:
 
-For scraping and processing the data sets:
+For scraping and processing the data sets (as we did [here](https://github.com/JasonWu00/ua-ru-losses-scraper/)):
 * Python
   * BeautifulSoup
   * Requests
