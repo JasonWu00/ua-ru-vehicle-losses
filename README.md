@@ -55,7 +55,7 @@ If you notice an problem with our work but do not have the know-how to implement
 
 Steps to create a Pull Request:
 1. Create a fork of this repo using the GitHub website.
-2. Clone your fork onto your local device: `git clone git@github.com:YourUsername/YourBranchName.git`
+2. Clone your fork onto your local device: `git clone git@github.com:YourUsername/YourForkName.git`
 3. Implement your changes to this fork. We assume that you know how to use `git commit` and `git push`.
 4. Commit and push your changes: `git commit -m "custom commit message here"`.
 5. Open a Pull Request from the GitHub website.
