@@ -54,10 +54,9 @@ To run the project locally, follow these steps:
 If you notice an problem with our work but do not have the know-how to implement a solution, [create an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue) detailing the problem and we will get to it. If you wish to fix the problem, create a branch, implement your solution there, then open a Pull Request (PR) detailing your solution.
 
 Steps to create a Pull Request:
-1. Create a branch using the GitHub website.
-2. Switch to your branch: `git checkout -b yourBranchNameHere`.
-  * This step assumes that you downloaded the repo through `git clone`.
-3. Implement your changes.
+1. Create a fork of this repo using the GitHub website.
+2. Clone your fork onto your local device: `git clone git@github.com:YourUsername/YourBranchName.git`
+3. Implement your changes to this fork. We assume that you know how to use `git commit` and `git push`.
 4. Commit and push your changes: `git commit -m "custom commit message here"`.
 5. Open a Pull Request from the GitHub website.
   * Remember to describe in the PR what your solution entails.
