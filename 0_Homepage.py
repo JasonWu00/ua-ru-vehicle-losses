@@ -48,6 +48,10 @@ st.text("Authors: Alan Mackiewitz, Jin Lin, Ze Hong Wu")
 
 st.markdown(
 """
+This project last collected data on 15 October 2023. \
+Events and developments after that date (such as the Kursk offensive or the \
+imminent arrival of North Korean troops, as of 26 October 2024) will not be shown.
+
 When was the last time you thought about the war in Ukraine?
 
 Have you, between 24 February 2022 and now, seen or heard any of these statements?
