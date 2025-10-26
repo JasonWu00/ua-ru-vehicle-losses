@@ -1,4 +1,4 @@
-**13 April 2025: This project was last updated in Winter 2023. If you are looking for up-to-date information and analyses, such as those related to incursions at Kursk or the effects of Donald Trump's administration on the war, you might want to look elsewhere. Due to various circumstances I do not plan on updating this project any time soon. You are free to make a fork of my work and do what I cannot.**
+**25 October 2025: Updated version of this project, with a dashboard on Tableau instead of Streamlit, can be found in this repo: https://github.com/JasonWu00/ua-ru-losses-scraper/**
 
 # On Russia's invasion of Ukraine
 
